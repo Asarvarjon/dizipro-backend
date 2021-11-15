@@ -1,10 +1,7 @@
+const { HomeGetController } = require("../controllers/HomeRouteController");
+
 const HomeRouter = require("express").Router();
 
-HomeRouter.get("/", (req, res) => {
-	console.log(req.db);
-	res.json({
-		ok: true,
-	});
-});
+HomeRouter.get("/", HomeGetController);
 
 module.exports = HomeRouter;

@@ -1,6 +1,7 @@
 require("dotenv").config()
 
 const express = require("express");
+const { customErrorMiddleware } = require("./middlewares/customErrorMiddleware");
 const { databaseMiddleware } = require("./middlewares/databaseMiddleware");
 const Routes = require("./routes");
 
@@ -19,7 +20,7 @@ async function server(){
         app.use(express.urlencoded({
             extended: true
         }))
-
+        app.use(customErrorMiddleware)
         app.use("/v1", Routes)
 
         app.use(databaseMiddleware)

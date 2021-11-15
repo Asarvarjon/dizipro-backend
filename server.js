@@ -2,6 +2,7 @@ require("dotenv").config()
 
 const express = require("express");
 const { databaseMiddleware } = require("./middlewares/databaseMiddleware");
+const Routes = require("./routes");
 
 const app = express();
 
@@ -19,6 +20,7 @@ async function server(){
             extended: true
         }))
 
+        app.use("/v1", Routes)
 
         app.use(databaseMiddleware)
     } catch (error) {

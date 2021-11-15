@@ -1,4 +1,6 @@
 const { Sequelize } = require("sequelize");
+const CountryModel = require("../../models/CountryModel");
+const init = require("./init");
 
 if(!process.env.CONNECTION_STRING){
     throw new Error("PG CONNECTION STRING NOT FOUND")
@@ -13,12 +15,17 @@ const sequelize = new Sequelize(process.env.CONNECTION_STRING, {
 module.exports = async function pg(){
     try {
         await sequelize.authenticate();
-        let db = {}
+        let db = {};
+
+        db.countries = await CountryModel(sequelize, Sequelize)
 
 
+        await sequelize.sync({ force: false });
 
-        return db;
+	    await init(db)
 
+
+        return db; 
     } catch (error) {
         console.log("SQL ERROR", error);
     }

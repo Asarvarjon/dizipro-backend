@@ -2,12 +2,12 @@ const { Sequelize } = require("sequelize");
 const CountryModel = require("../../models/CountryModel");
 const init = require("./init");
 
-if(!process.env.CONNECTION_STRING){
+if(!process.env.PG_CONNECTION_STRING){
     throw new Error("PG CONNECTION STRING NOT FOUND")
 };
 
 
-const sequelize = new Sequelize(process.env.CONNECTION_STRING, {
+const sequelize = new Sequelize(process.env.PG_CONNECTION_STRING, {
     logging: false
 });
 

@@ -23,7 +23,7 @@ async function server(){
         app.use(customErrorMiddleware)
         app.use("/v1", Routes)
 
-        app.use((req, res, next) =>{
+        app.use(async(req, res, next) =>{
             const db = await pg;
             req.db = db;
             next()

@@ -1,6 +1,7 @@
 require("dotenv").config()
 
 const express = require("express");
+const { databaseMiddleware } = require("./middlewares/databaseMiddleware");
 
 const app = express();
 
@@ -17,6 +18,9 @@ async function server(){
         app.use(express.urlencoded({
             extended: true
         }))
+
+
+        app.use(databaseMiddleware)
     } catch (error) {
         console.log(`SERVER ERROR: ${error}`);
     }

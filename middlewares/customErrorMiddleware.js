@@ -5,6 +5,6 @@ module.exports.customErrorMiddleware = function customErrorMiddleware(
 	res,
 	next
 ) {
-	res.error = CustomError;
+	res.error = CustomError.CustomError;
 	next();
 };

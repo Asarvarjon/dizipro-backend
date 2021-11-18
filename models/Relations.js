@@ -12,4 +12,18 @@ module.exports = async function (db) {
 			allowNull: false,
 		},
 	});
+
+	db.users.hasMany(db.sessions, {
+		foreignKey: {
+			name: "user_id",
+			allowNull: false,
+		},
+	});
+
+	db.sessions.belongsTo(db.users, {
+		foreignKey: {
+			name: "user_id",
+			allowNull: false,
+		},
+	});
 };

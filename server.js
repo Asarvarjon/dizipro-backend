@@ -11,23 +11,23 @@ const PORT = process.env.PORT || 3030;
 
 async function server(){
     try {
+        const db = await pg();
         app.listen(PORT, ()=> {
             console.log(`Server is ready at ${PORT}`);
         })
 
         app.use(express.json());
 
+        app.use(async(req, res, next) =>{ 
+            req.db = db;
+            next()
+        }) 
         app.use(express.urlencoded({
             extended: true
         }))
-        app.use(customErrorMiddleware)
-        app.use("/v1", Routes)
+        app.use(customErrorMiddleware)  
 
-        app.use(async(req, res, next) =>{
-            const db = await pg;
-            req.db = db;
-            next()
-        })
+        app.use("/v1", Routes)
     } catch (error) {
         console.log(`SERVER ERROR: ${error}`);
     }

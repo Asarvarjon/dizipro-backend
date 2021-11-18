@@ -1,0 +1,101 @@
+const { generateCrypt } = require("../modules/bcrypt");
+const UserValidations = require("../validations/UserValidations");
+const { createToken } = require("../modules/jsonwebtoken");
+
+module.exports = class UserController {
+	static async UserCreateAccountPostController(req, res, next) {
+		try {
+			const data = await UserValidations.UserCreateAccountValidation(
+				req.body,
+				res.error
+			);
+
+			const user = await req.db.users.create({
+				...data,
+				user_password: generateCrypt(data.user_password),
+			});
+
+			const session = await req.db.sessions.create({
+				session_user_agent: req.headers["user-agent"] || "Unknown",
+				user_id: user.dataValues.user_id,
+			});
+
+			const token = createToken({
+				session_id: session.dataValues.session_id,
+			});
+
+			await res.status(201).json({
+				ok: true,
+				message: "User created successfully",
+				data: {
+					token,
+				},
+			});
+		} catch (error) {
+			if (error.message.startsWith("notNull Violation")) {
+				error.code = 400;
+				error.message = "Country is invalid";
+			} else if (error.message.includes("Validation error")) {
+				error.code = 400;
+				error.message = "Email already exists";
+			}
+
+			next(error);
+		}
+	}
+
+	static async UserLoginAccountPostController(req, res, next) {
+		try {
+			const data = await UserValidations.UserLoginAccountValidation(
+				req.body,
+				res.error
+			);
+
+			// Find user
+
+			const user = await req.db.users.findOne({
+				where: {
+					user_email: data.user_email,
+				},
+				raw: true,
+			});
+
+			if (!user) throw new res.error(404, "User not found");
+
+			// Check password
+
+			const isTrust = compareCrypt(
+				data.user_password,
+				user.user_password
+			);
+
+			if (!isTrust) throw new res.error(400, "Password is incorrect");
+
+			await req.db.sessions.destroy({
+				where: {
+					session_user_agent: req.headers["user-agent"] || "Unknown",
+					user_id: user.user_id,
+				},
+			});
+
+			const session = await req.db.sessions.create({
+				session_user_agent: req.headers["user-agent"] || "Unknown",
+				user_id: user.user_id,
+			});
+
+			const token = createToken({
+				session_id: session.dataValues.session_id,
+			});
+
+			res.status(201).json({
+				ok: true,
+				message: "Logged successfully",
+				data: {
+					token,
+				},
+			});
+		} catch (error) {
+			next(error);
+		}
+	}
+};

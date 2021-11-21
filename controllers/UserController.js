@@ -132,7 +132,7 @@ module.exports = class UserController {
 
 			await sendEmail(
 				user.dataValues.user_email,
-				`<a href="${process.env.SITE_URL}/v1/users/password/${attempt.dataValues.attempt_id}">Click to recover</a>`
+				`<a href="${process.env.SITE_URL}/v1/users/password/${attempt.dataValues.attempt_id}/">Click to recover</a>`
 			);
 
 			res.status(201).json({

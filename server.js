@@ -1,6 +1,7 @@
 require("dotenv").config()
 
 const express = require("express");
+const { errorHandlerMiddleware } = require("./helpers/CustomError");
 const { customErrorMiddleware } = require("./middlewares/customErrorMiddleware"); 
 const pg = require("./modules/pg/pg");
 const Routes = require("./routes");
@@ -28,6 +29,8 @@ async function server(){
         app.use(customErrorMiddleware)  
 
         app.use("/v1", Routes)
+
+        app.use(errorHandlerMiddleware)
     } catch (error) {
         console.log(`SERVER ERROR: ${error}`);
     }

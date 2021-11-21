@@ -98,4 +98,11 @@ module.exports = class UserController {
 			next(error);
 		}
 	}
+
+	static async UserRecoveryPasswordSubmitPostController(req, res, next) {
+		try {
+		} catch (error) {
+			next(error);
+		}
+	}
 };

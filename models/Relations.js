@@ -54,5 +54,19 @@ module.exports = async function (db) {
 			allowNull: false,
 		},
 	});
+
+	db.users.hasMany(db.user_bans, {
+		foreignKey: {
+			name: "user_id",
+			allowNull: false,
+		},
+	});
+
+	db.user_bans.belongsTo(db.users, {
+		foreignKey: {
+			name: "user_id",
+			allowNull: false,
+		},
+	});
  
 };

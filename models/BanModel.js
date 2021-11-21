@@ -4,14 +4,14 @@ module.exports = async (sequelize, Sequelize) => {
 			type: Sequelize.UUID,
 			defaultValue: Sequelize.UUIDV4(),
 			primaryKey: true,
-		}, 
-        ban_expire_date: {
-			type: Sequelize.DATE, 
-			allowNull: false
-		}, 
-        ban_reason: {
-            type: Sequelize.TEXT,
-            allowNull: false
-        }
+		},
+		ban_expire_date: {
+			type: Sequelize.DATE,
+			allowNull: false,
+		},
+		ban_reason: {
+			type: Sequelize.STRING,
+			allowNull: false,
+		},
 	});
 };

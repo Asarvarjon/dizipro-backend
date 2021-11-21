@@ -42,4 +42,14 @@ module.exports = class UserValidations {
 				.error(new CustomError(400, "Password is invalid")),
 		}).validateAsync(data);
 	}
+
+	static async UserForgotPasswordValidation(data, CustomError) {
+		return await Joi.object({
+			user_email: Joi.string()
+				.email()
+				.required()
+				.lowercase()
+				.error(new CustomError(400, "Email is invalid")),
+		}).validateAsync(data);
+	}
 };

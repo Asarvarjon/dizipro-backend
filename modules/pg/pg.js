@@ -1,4 +1,5 @@
 const { Sequelize } = require("sequelize");
+const BanModel = require("../../models/BanModel");
 const CountryModel = require("../../models/CountryModel");
 const EmailAttemptsModel = require("../../models/EmailAttemptsModel");
 const Relations = require("../../models/Relations");
@@ -24,7 +25,8 @@ module.exports = async function pg(){
         db.countries = await CountryModel(sequelize, Sequelize)
         db.users = await UsersModel(sequelize, Sequelize) 
         db.sessions = await UserSessionModel(sequelize, Sequelize);
-        db.attempts = await EmailAttemptsModel(sequelize, Sequelize)
+        db.attempts = await EmailAttemptsModel(sequelize, Sequelize);
+        db.user_bans = await BanModel(sequelize, Sequelize)
 
         await Relations(db);
         await sequelize.sync({ force: false });

@@ -9,8 +9,7 @@ async function sendEmail(mailTo, html) {
 		host: "smtp.mail.ru",
 		port: 465,
 	});
-
-	console.log(transport);
+ 
 
 	let info = await transport.sendMail({
 		from: `"Dizipro" <${process.env.MAIL_ADDRESS}>`, // sender address
@@ -18,8 +17,7 @@ async function sendEmail(mailTo, html) {
 		subject: "Confirm recovery password ✔", // Subject line
 		html, // html body
 	});
-
-	console.log(info);
+ 
 
 	return info;
 }

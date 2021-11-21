@@ -15,5 +15,4 @@ UserRouter.get(
 );
 
 module.exports = UserRouter;
-
-module.exports = UserRouter;
+ 

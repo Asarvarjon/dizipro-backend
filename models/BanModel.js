@@ -6,7 +6,7 @@ module.exports = async (sequelize, Sequelize) => {
 			primaryKey: true,
 		}, 
         ban_expire_date: {
-			type: Sequelize.Date, 
+			type: Sequelize.DATE, 
 			allowNull: false
 		}, 
         ban_reason: {

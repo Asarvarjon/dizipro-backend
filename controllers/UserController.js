@@ -24,7 +24,9 @@ module.exports = class UserController {
 
 			const token = createToken({
 				session_id: session.dataValues.session_id,
+				role: "user",
 			});
+
 
 			await res.status(201).json({
 				ok: true,
@@ -87,6 +89,7 @@ module.exports = class UserController {
 
 			const token = createToken({
 				session_id: session.dataValues.session_id,
+				role: user.dataValues.user_role || "user",
 			});
 
 			res.status(201).json({

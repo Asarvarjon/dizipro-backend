@@ -3,7 +3,7 @@ const AdminValidations = require("../validations/AdminValidations");
 module.exports = class AdminController {
 	static async CreateBanPostController(req, res, next) {
 		try {
-			const data = AdminValidations.CreateBanValidation(
+			const data = await AdminValidations.CreateBanValidation(
 				req.body,
 				res.error
 			);

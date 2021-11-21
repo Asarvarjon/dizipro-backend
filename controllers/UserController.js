@@ -89,7 +89,7 @@ module.exports = class UserController {
 
 			const token = createToken({
 				session_id: session.dataValues.session_id,
-				role: user.dataValues.user_role || "user",
+				role: user.user_role || "user",
 			});
 
 			res.status(201).json({

@@ -1,3 +1,5 @@
+const { generateCrypt } = require("../bcrypt");
+
 module.exports = async function init(db) {
 	for (let country of data) {
 		await db.countries.create({

@@ -1,4 +1,4 @@
-const { generateCrypt } = require("../modules/bcrypt");
+const { generateCrypt, compareCrypt } = require("../modules/bcrypt");
 const UserValidations = require("../validations/UserValidations");
 const { createToken } = require("../modules/jsonwebtoken");
 

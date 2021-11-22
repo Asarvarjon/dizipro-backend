@@ -2,6 +2,7 @@ const { Sequelize } = require("sequelize");
 const BanModel = require("../../models/BanModel");
 const CountryModel = require("../../models/CountryModel");
 const EmailAttemptsModel = require("../../models/EmailAttemptsModel");
+const ProjectModel = require("../../models/ProjectModel");
 const Relations = require("../../models/Relations");
 const SkillModel = require("../../models/SkillModel");
 const SoftwareModel = require("../../models/SoftwareModel");
@@ -30,7 +31,8 @@ module.exports = async function pg(){
         db.attempts = await EmailAttemptsModel(sequelize, Sequelize);
         db.user_bans = await BanModel(sequelize, Sequelize);
         db.skills = await SkillModel(sequelize, Sequelize);
-        db.softwares = await SoftwareModel(sequelize, Sequelize)
+        db.softwares = await SoftwareModel(sequelize, Sequelize);
+        db.projects = await ProjectModel(sequelize, Sequelize)
 
         await Relations(db);
         await sequelize.sync({ force: false });

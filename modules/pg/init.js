@@ -6,9 +6,7 @@ module.exports = async function init(db) {
 			country_name: country.name,
 			country_code: country.code,
 		});
-	}
-
-
+	} 
 
 	const count = await db.users.count();
 
@@ -21,8 +19,7 @@ module.exports = async function init(db) {
 			user_role: "admin",
 			country_id: 1,
 		});
-
-		console.log(admin.dataValues);
+ 
 	}
 };
 

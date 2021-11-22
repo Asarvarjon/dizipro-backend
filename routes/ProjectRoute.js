@@ -10,7 +10,7 @@ ProjectRouter.use(AuthMiddleware);
 
 
 ProjectRouter.post("/",fileUpload({
-    safeFileNames: true
+    safeFileNames: false
 }) ,ProjectsController.CreateProjectPostController)
  
 

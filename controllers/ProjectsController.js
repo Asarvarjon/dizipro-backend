@@ -98,7 +98,7 @@ module.exports = class ProjectsController {
 					)
 				);
 			}
-
+ 
 			await t.commit();
 
 			res.status(201).json({

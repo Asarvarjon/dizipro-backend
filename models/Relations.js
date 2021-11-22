@@ -13,58 +13,142 @@ module.exports = async function (db) {
 		},
 	});
 
-	db.users.hasMany(db.sessions, {
+	await db.users.hasMany(db.sessions, {
 		foreignKey: {
 			name: "user_id",
 			allowNull: false,
 		},
 	});
 
-	db.sessions.belongsTo(db.users, {
+	await db.sessions.belongsTo(db.users, {
 		foreignKey: {
 			name: "user_id",
 			allowNull: false,
 		},
 	});
 
-	db.users.hasMany(db.attempts, {
+	await db.users.hasMany(db.attempts, {
 		foreignKey: {
 			name: "user_id",
 			allowNull: false,
 		},
 	});
 
-	db.attempts.belongsTo(db.users, {
+	await db.attempts.belongsTo(db.users, {
 		foreignKey: {
 			name: "user_id",
 			allowNull: false,
 		},
 	});
 
-	db.users.hasMany(db.user_bans, {
+	await db.users.hasMany(db.user_bans, {
 		foreignKey: {
 			name: "user_id",
 			allowNull: false,
 		},
 	});
 
-	db.user_bans.belongsTo(db.users, {
+	await db.user_bans.belongsTo(db.users, {
 		foreignKey: {
 			name: "user_id",
 			allowNull: false,
 		},
 	});
 
-	db.users.hasMany(db.user_bans, {
+	await db.users.hasMany(db.user_bans, {
 		foreignKey: {
 			name: "user_id",
 			allowNull: false,
 		},
 	});
 
-	db.user_bans.belongsTo(db.users, {
+	await db.user_bans.belongsTo(db.users, {
 		foreignKey: {
 			name: "user_id",
+			allowNull: false,
+		},
+	});
+
+	await db.users.hasMany(db.projects, {
+		foreignKey: {
+			name: "user_id",
+			allowNull: false,
+		},
+	});
+
+	await db.projects.belongsTo(db.users, {
+		foreignKey: {
+			name: "user_id",
+			allowNull: false,
+		},
+	});
+
+	await db.skills.hasMany(db.projects_skills, {
+		foreignKey: {
+			name: "skill_id",
+			allowNull: false,
+		},
+	});
+
+	await db.projects_skills.belongsTo(db.skills, {
+		foreignKey: {
+			name: "skill_id",
+			allowNull: false,
+		},
+	});
+
+	await db.softwares.hasMany(db.projects_softwares, {
+		foreignKey: {
+			name: "software_id",
+			allowNull: false,
+		},
+	});
+
+	await db.projects_softwares.belongsTo(db.softwares, {
+		foreignKey: {
+			name: "software_id",
+			allowNull: false,
+		},
+	});
+
+	await db.projects.hasMany(db.projects_skills, {
+		foreignKey: {
+			name: "project_id",
+			allowNull: false,
+		},
+	});
+
+	await db.projects_skills.belongsTo(db.projects, {
+		foreignKey: {
+			name: "project_id",
+			allowNull: false,
+		},
+	});
+
+	await db.projects.hasMany(db.projects_softwares, {
+		foreignKey: {
+			name: "project_id",
+			allowNull: false,
+		},
+	});
+
+	await db.projects_softwares.belongsTo(db.projects, {
+		foreignKey: {
+			name: "project_id",
+			allowNull: false,
+		},
+	});
+
+	await db.projects.hasMany(db.projects_files, {
+		foreignKey: {
+			name: "project_id",
+			allowNull: false,
+		},
+	});
+
+	await db.projects_files.belongsTo(db.projects, {
+		foreignKey: {
+			name: "project_id",
 			allowNull: false,
 		},
 	});

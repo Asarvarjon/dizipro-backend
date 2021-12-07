@@ -5,6 +5,7 @@ const { errorHandlerMiddleware } = require("./helpers/CustomError");
 const { customErrorMiddleware } = require("./middlewares/customErrorMiddleware"); 
 const pg = require("./modules/pg/pg");
 const Routes = require("./routes");
+const cors = require("cors")
 
 const app = express();
 
@@ -17,7 +18,11 @@ async function server(){
             console.log(`Server is ready at ${PORT}`);
         })
 
+        app.use(cors())
+
         app.use(express.json());
+
+        
 
         app.use(async(req, res, next) =>{ 
             req.db = db;

@@ -4,7 +4,7 @@ const express = require("express");
 const { errorHandlerMiddleware } = require("./helpers/CustomError");
 const { customErrorMiddleware } = require("./middlewares/customErrorMiddleware"); 
 const pg = require("./modules/pg/pg");
-const Routes = require("./routes");
+const Routes = require("./routes"); 
 const cors = require("cors")
 
 const app = express();
@@ -12,14 +12,13 @@ const app = express();
 const PORT = process.env.PORT || 3030;
 
 async function server(){
-    try {
+    try { 
         const db = await pg();
         app.listen(PORT, ()=> {
             console.log(`Server is ready at ${PORT}`);
         })
-
+ 
         app.use(cors())
-
         app.use(express.json());
 
         

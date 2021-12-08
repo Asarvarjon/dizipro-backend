@@ -10,7 +10,7 @@ module.exports = class UserController {
 			const data = await UserValidations.UserCreateAccountValidation(
 				req.body,
 				res.error
-			);
+			); 
 
 			const user = await req.db.users.create({
 				...data,
